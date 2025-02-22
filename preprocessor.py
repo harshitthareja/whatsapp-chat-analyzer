@@ -20,8 +20,8 @@ def preprocess(data):
 
     df = pd.DataFrame({'user_message': messages, 'message_date': dates})
 
-    # Clean and convert the 'message_date' column
-    df['message_date'] = df['message_date'].str.replace('\u202F', ' ', regex=True).str.strip()
+    # Convert message_date column to string before applying .str functions
+    df['message_date'] = df['message_date'].astype(str).str.replace('\u202F', ' ', regex=True).str.strip()
 
     if am_pm_format:
         df['message_date'] = pd.to_datetime(df['message_date'], format='%d/%m/%y, %I:%M %p - ', errors='coerce')
